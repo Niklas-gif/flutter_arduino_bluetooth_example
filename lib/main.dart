@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:adaptive_theme/adaptive_theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,14 +14,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
         create:(context)=>AppState(),
-        child:MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: MyHomePage(),
-    )
+        child: AdaptiveTheme(
+          light: ThemeData.light(useMaterial3: true),
+          dark: ThemeData.dark(useMaterial3: true),
+          initial: AdaptiveThemeMode.light,
+          builder: (theme,darkTheme) =>MaterialApp(
+            title: 'Bluetooth',
+            theme: theme,
+            darkTheme: darkTheme,
+            home: MyHomePage(),
+          ),)
     );
   }
 }
