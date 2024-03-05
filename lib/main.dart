@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_arduino_bluetooth_example/nav_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 
@@ -45,16 +46,6 @@ class MyHomePage extends StatelessWidget {
             .inversePrimary,
         title: const Text("Bluetooth"),
       ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-          ],
-        ),
-      ),
-    );
+      body: NavigationScreen());
   }
 }
