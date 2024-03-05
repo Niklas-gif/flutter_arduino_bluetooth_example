@@ -13,6 +13,8 @@ class NavigationScreen extends StatelessWidget {
     return Scaffold(
       body: navProvider.items[navProvider.currentIndex].widget,
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.deepPurpleAccent.shade100,
+        unselectedItemColor: Colors.deepPurple,
         currentIndex: navProvider.currentIndex,
         onTap: (index) {
           navProvider.currentIndex = index;

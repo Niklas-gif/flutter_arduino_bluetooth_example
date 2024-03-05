@@ -5,9 +5,7 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'navbar_provider.dart';
 
 void main() {
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => BottomNavigationBarProvider())
-  ],child: MyApp(),));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -16,22 +14,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AdaptiveTheme(
-          light: ThemeData.light(useMaterial3: true),
-          dark: ThemeData.dark(useMaterial3: true),
-          initial: AdaptiveThemeMode.light,
-          builder: (theme, darkTheme) => MaterialApp(
-            title: 'Bluetooth',
-            theme: theme,
-            darkTheme: darkTheme,
-            home: Scaffold(
-                appBar: AppBar(
-                  backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-                  title: const Text("Bluetooth"),
-                ),
-                body: NavigationScreen()),
-          ),
-        );
+      light: ThemeData.light(useMaterial3: true),
+      dark: ThemeData.dark(useMaterial3: true),
+      initial: AdaptiveThemeMode.dark,
+      builder: (theme, darkTheme) => MaterialApp(
+        title: 'Bluetooth',
+        theme: theme,
+        darkTheme: darkTheme,
+        home: ChangeNotifierProvider(
+          create: (context) => BottomNavigationBarProvider(),
+          child: Scaffold(
+              appBar: AppBar(
+                backgroundColor: Colors.deepPurple.withOpacity(0.5),
+                title: const Text("Bluetooth"),
+              ),
+              body: NavigationScreen()),
+        ),
+      ),
+    );
   }
 }
-
-
