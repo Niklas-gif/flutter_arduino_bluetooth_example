@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_arduino_bluetooth_example/nav_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'navbar_provider.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
