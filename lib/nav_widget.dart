@@ -1,12 +1,12 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_arduino_bluetooth_example/connect_screen.dart';
+import 'package:flutter_arduino_bluetooth_example/send_screen.dart';
 import 'package:provider/provider.dart';
 
 class BottomNavigationBarProvider with ChangeNotifier {
   List<NavBarItem> items = [
-    NavBarItem(label: "Connect",icon: Icons.bluetooth),
-    NavBarItem(label: "Send",icon: Icons.send)
+    NavBarItem(widget: ConnectScreen(),label: "Connect",icon: Icons.bluetooth,),
+    NavBarItem(widget: SendScreen(), label: "Send",icon: Icons.send)
   ];
   int _currentIndex = 0;
   int get currentIndex {
@@ -32,14 +32,19 @@ class NavigationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final navProvider = BottomNavigationBarProvider();
+    final navProvider = Provider.of<BottomNavigationBarProvider>(context,);
     return Scaffold(
       body: navProvider.items[navProvider._currentIndex].widget,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: navProvider._currentIndex,
         onTap: (index) {
-          navProvider._currentIndex = index;
-        },items: navProvider.items.map((item)=>BottomNavigationBarItem(icon: Icon(item.icon),label: item.label)).toList(),
+          print(index);
+          navProvider.currentIndex = index;
+        },items: navProvider.items.map((item)=>
+          BottomNavigationBarItem(
+          icon: Icon(item.icon),
+          label: item.label))
+          .toList(),
       ),
     );
   }
