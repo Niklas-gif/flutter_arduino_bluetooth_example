@@ -7,7 +7,7 @@ class ConnectScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text("Connect"),
+        child: Icon(size: 69*6,color: Colors.lightBlueAccent, Icons.bluetooth_disabled),
       ),
     );
   }
