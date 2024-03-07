@@ -8,6 +8,10 @@ class BluetoothProvider extends ChangeNotifier {
   FlutterBluetoothSerial bluetooth = FlutterBluetoothSerial.instance;
   BluetoothState _bluetoothState = BluetoothState.UNKNOWN;
 
+  PermissionStatus ?_bluetooth;
+  PermissionStatus ?_bluetoothConnection;
+  PermissionStatus ?_bluetoothScan;
+
   BluetoothState get currentBluetoothState {
       return _bluetoothState;
   }
@@ -18,8 +22,19 @@ class BluetoothProvider extends ChangeNotifier {
   }
 
   void checkPermissions() async {
-    //Todo
-    //var status = await Permission.bluetooth.request();
+    if(_bluetooth == null && _bluetoothConnection == null && _bluetoothScan == null) {
+      _bluetooth = await Permission.bluetooth.request();
+      _bluetoothScan = await Permission.bluetoothScan.request();
+      _bluetoothConnection = await Permission.bluetoothConnect.request();
+    }
+    if(_bluetooth != PermissionStatus.granted &&
+        _bluetoothConnection != PermissionStatus.granted &&
+        _bluetoothScan != PermissionStatus.granted) {
+      print("Missing permission");
+    }
+    print(_bluetooth.toString());
+    print(_bluetoothScan.toString());
+    print(_bluetoothConnection.toString());
   }
   
   void send() async {

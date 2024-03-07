@@ -26,13 +26,27 @@ class ConnectWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(size: 69 * 6, color: Colors.lightBlueAccent, Icons.bluetooth)
-        ],
-      ),
+    return Consumer<BluetoothProvider>(
+      builder: (context, bluetoothProvider, child) {
+        return Scaffold(
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                size: 69 * 6,
+                color: Colors.lightBlueAccent,
+                Icons.bluetooth,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                 bluetoothProvider.checkPermissions();
+                },
+                child: const Text("Test"),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
