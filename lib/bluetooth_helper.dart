@@ -10,7 +10,7 @@ class BluetoothHelper extends ChangeNotifier {
       return _bluetoothState;
   }
 
-  void updateState() async {
+  void checkState() async {
     _bluetoothState = await bluetooth.state;
     notifyListeners();
   }

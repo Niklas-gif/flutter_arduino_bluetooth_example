@@ -9,7 +9,7 @@ class NavigationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final navProvider = Provider.of<BottomNavigationBarProvider>(context,);
+    final navProvider = Provider.of<BottomNavigationBarProvider>(context);
     return Scaffold(
       body: navProvider.items[navProvider.currentIndex].widget,
       bottomNavigationBar: BottomNavigationBar(

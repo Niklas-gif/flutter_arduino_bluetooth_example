@@ -12,6 +12,10 @@ class BottomNavigationBarProvider with ChangeNotifier {
     return _currentIndex;
   }
 
+  String get selectedLabel {
+    return items[_currentIndex].label ?? "none";
+  }
+
   set currentIndex(int index) {
     _currentIndex = index;
     notifyListeners();

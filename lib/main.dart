@@ -26,7 +26,11 @@ class MyApp extends StatelessWidget {
           child: Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.deepPurple.withOpacity(0.5),
-                title: const Text("Bluetooth"),
+                title: Consumer<BottomNavigationBarProvider>(
+                  builder: (context,provider,child) {
+                    return Text(provider.selectedLabel);
+                  },
+                ),
               ),
               body: NavigationScreen()),
         ),
