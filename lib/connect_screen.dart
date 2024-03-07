@@ -8,7 +8,8 @@ class ConnectScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BluetoothProvider bluetoothProvider = Provider.of<BluetoothProvider>(context);
+    BluetoothProvider bluetoothProvider =
+        Provider.of<BluetoothProvider>(context);
     bluetoothProvider.checkState();
     if (bluetoothProvider.currentBluetoothState == BluetoothState.STATE_ON) {
       return const ConnectWidget();
@@ -25,13 +26,11 @@ class ConnectWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-              size: 69 * 6,
-              color: Colors.lightBlueAccent,
-              Icons.bluetooth)
+          Icon(size: 69 * 6, color: Colors.lightBlueAccent, Icons.bluetooth)
         ],
       ),
     );
