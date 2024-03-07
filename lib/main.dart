@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_arduino_bluetooth_example/nav_widget.dart';
+import 'package:flutter_arduino_bluetooth_example/bluetooth_provider.dart';
+import 'package:flutter_arduino_bluetooth_example/navigation_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'navbar_provider.dart';
@@ -21,8 +22,10 @@ class MyApp extends StatelessWidget {
         title: 'Bluetooth',
         theme: theme,
         darkTheme: darkTheme,
-        home: ChangeNotifierProvider(
-          create: (context) => BottomNavigationBarProvider(),
+        home: MultiProvider(
+      providers: [
+      ChangeNotifierProvider(create: (context) => BottomNavigationBarProvider()),
+      ChangeNotifierProvider(create: (context) => BluetoothProvider())],
           child: Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.deepPurple.withOpacity(0.5),

@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 
-class BluetoothHelper extends ChangeNotifier {
+class BluetoothProvider extends ChangeNotifier {
   FlutterBluetoothSerial bluetooth = FlutterBluetoothSerial.instance;
   BluetoothState _bluetoothState = BluetoothState.UNKNOWN;
 
