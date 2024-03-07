@@ -22,19 +22,23 @@ class BluetoothProvider extends ChangeNotifier {
   }
 
   void checkPermissions() async {
-    if(_bluetooth == null && _bluetoothConnection == null && _bluetoothScan == null) {
-      _bluetooth = await Permission.bluetooth.request();
-      _bluetoothScan = await Permission.bluetoothScan.request();
-      _bluetoothConnection = await Permission.bluetoothConnect.request();
+    //TODO This is just for testing and needs refactoring!
+    if(_bluetoothState == BluetoothState.STATE_ON || _bluetoothState == BluetoothState.STATE_BLE_TURNING_ON) {
+      if (_bluetooth == null && _bluetoothConnection == null &&
+          _bluetoothScan == null) {
+        _bluetooth = await Permission.bluetooth.request();
+        _bluetoothScan = await Permission.bluetoothScan.request();
+        _bluetoothConnection = await Permission.bluetoothConnect.request();
+      }
+      if (_bluetooth != PermissionStatus.granted &&
+          _bluetoothConnection != PermissionStatus.granted &&
+          _bluetoothScan != PermissionStatus.granted) {
+        print("Missing permission");
+      }
+      print(_bluetooth.toString());
+      print(_bluetoothScan.toString());
+      print(_bluetoothConnection.toString());
     }
-    if(_bluetooth != PermissionStatus.granted &&
-        _bluetoothConnection != PermissionStatus.granted &&
-        _bluetoothScan != PermissionStatus.granted) {
-      print("Missing permission");
-    }
-    print(_bluetooth.toString());
-    print(_bluetoothScan.toString());
-    print(_bluetoothConnection.toString());
   }
   
   void send() async {
