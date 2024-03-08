@@ -4,8 +4,8 @@ import 'connect_screen.dart';
 
 class BottomNavigationBarProvider with ChangeNotifier {
   List<NavBarItem> items = [
-    NavBarItem(widget: ConnectScreen(),label: "Connect",icon: Icons.bluetooth,),
-    NavBarItem(widget: SendScreen(), label: "Send",icon: Icons.send)
+    NavBarItem(widget: const ConnectScreen(),label: "Connect",icon: Icons.bluetooth,),
+    NavBarItem(widget: const SendScreen(), label: "Send",icon: Icons.send)
   ];
   int _currentIndex = 0;
   int get currentIndex {

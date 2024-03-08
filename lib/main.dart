@@ -6,7 +6,7 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'navbar_provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
                   },
                 ),
               ),
-              body: NavigationScreen()),
+              body: const NavigationScreen()),
         ),
       ),
     );
