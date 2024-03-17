@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_arduino_bluetooth_example/config.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
@@ -7,9 +9,9 @@ import 'package:permission_handler/permission_handler.dart';
 
 class BluetoothProvider extends ChangeNotifier {
   late BluetoothConnection _bluetoothConnection;
-  FlutterBluetoothSerial _bluetoothSerial = FlutterBluetoothSerial.instance;
+  final FlutterBluetoothSerial _bluetoothSerial = FlutterBluetoothSerial.instance;
   BluetoothState _bluetoothState = BluetoothState.UNKNOWN;
-  bool _isConnected = false;
+  bool isConnected = false;
 
   PermissionStatus ?_bluetoothPermission;
   PermissionStatus ?_bluetoothConnectionPermission;
@@ -21,6 +23,11 @@ class BluetoothProvider extends ChangeNotifier {
 
   void checkState() async {
     _bluetoothState = await _bluetoothSerial.state;
+    notifyListeners();
+  }
+
+  void checkConnect() {
+    isConnected =  _bluetoothConnection.isConnected;
     notifyListeners();
   }
   //TODO CLEAN UP THIS MESS!!!
@@ -49,26 +56,28 @@ class BluetoothProvider extends ChangeNotifier {
   void connect() async {
     try {
       _bluetoothConnection = await BluetoothConnection.toAddress(AppConfig.deviceAddress);
-      _isConnected = _bluetoothConnection.isConnected;
+      isConnected = _bluetoothConnection.isConnected;
       print("Connected to the device");
     } catch(error) {
         print(error);
     }
+    notifyListeners();
   }
   
   void send(String message) async {
-    if (_isConnected) {
+    if (isConnected) {
+      _bluetoothConnection.output.add(Uint8List.fromList(message.codeUnits));
     }
   }
   
   void receive() async {
-    if (_isConnected) {
+    if (isConnected) {
 
     }
   }
 
   void closeConnection() {
-    if (_isConnected) {
+    if (isConnected) {
       _bluetoothConnection.close();
     }
   }
