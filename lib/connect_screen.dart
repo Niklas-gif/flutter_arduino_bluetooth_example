@@ -38,13 +38,10 @@ class ConnectWidget extends StatelessWidget {
                 Icons.bluetooth,
               ),
               ElevatedButton(
-                onPressed: () {
-                  bluetoothProvider.checkPermissions();
-                },
-                child: const Text("Connect"),
-              ),
-              ElevatedButton(
-                onPressed: bluetoothProvider.isConnected ? () {} : null,
+                onPressed: bluetoothProvider.currentBluetoothState.isEnabled ? () {
+                  print("Click");
+                  BluetoothProvider().send("3");
+                } : null,
                 child: const Text("Send"),
               )
             ],

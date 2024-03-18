@@ -17,6 +17,10 @@ class BluetoothProvider extends ChangeNotifier {
   PermissionStatus ?_bluetoothConnectionPermission;
   PermissionStatus ?_bluetoothScanPermission;
 
+  BluetoothProvider() {
+    checkPermissions();
+  }
+
   BluetoothState get currentBluetoothState {
       return _bluetoothState;
   }
@@ -40,9 +44,8 @@ class BluetoothProvider extends ChangeNotifier {
         _bluetoothPermission = await Permission.bluetooth.request();
         _bluetoothScanPermission = await Permission.bluetoothScan.request();
         _bluetoothConnectionPermission = await Permission.bluetoothConnect.request();
-      } else {
-        connect();
       }
+      notifyListeners();
       print(_bluetoothPermission.toString());
       print(_bluetoothScanPermission.toString());
       print(_bluetoothConnectionPermission.toString());
@@ -52,22 +55,17 @@ class BluetoothProvider extends ChangeNotifier {
   void listDevices() {
 
   }
-
-  void connect() async {
+  
+  void send(String message) async {
     try {
-      _bluetoothConnection = await BluetoothConnection.toAddress(AppConfig.deviceAddress);
-      isConnected = _bluetoothConnection.isConnected;
-      print("Connected to the device");
+      _bluetoothConnection =
+      await BluetoothConnection.toAddress(AppConfig.deviceAddress);
+      print(Uint8List.fromList(message.codeUnits));
+      _bluetoothConnection.output.add(Uint8List.fromList(message.codeUnits));
     } catch(error) {
         print(error);
     }
     notifyListeners();
-  }
-  
-  void send(String message) async {
-    if (isConnected) {
-      _bluetoothConnection.output.add(Uint8List.fromList(message.codeUnits));
-    }
   }
   
   void receive() async {
