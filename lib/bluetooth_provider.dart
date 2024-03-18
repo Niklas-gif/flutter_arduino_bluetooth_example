@@ -51,10 +51,6 @@ class BluetoothProvider extends ChangeNotifier {
       print(_bluetoothConnectionPermission.toString());
     }
   }
-
-  void listDevices() {
-
-  }
   
   void send(String message) async {
     try {
@@ -65,13 +61,8 @@ class BluetoothProvider extends ChangeNotifier {
     } catch(error) {
         print(error);
     }
+    _bluetoothConnection.finish();
     notifyListeners();
-  }
-  
-  void receive() async {
-    if (isConnected) {
-
-    }
   }
 
   void closeConnection() {
