@@ -30,19 +30,58 @@ class ConnectWidget extends StatelessWidget {
       builder: (context, bluetoothProvider, child) {
         return Scaffold(
           body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Icon(
                 size: 69 * 6,
                 color: Colors.lightBlueAccent,
                 Icons.bluetooth,
               ),
-              ElevatedButton(
-                onPressed: bluetoothProvider.currentBluetoothState.isEnabled ? () {
-                  print("Click");
-                  BluetoothProvider().send("3");
-                } : null,
-                child: const Text("Send"),
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      children: [
+                        ElevatedButton(
+                          onPressed: bluetoothProvider.currentBluetoothState.isEnabled ? () {
+                            print("Click");
+                            BluetoothProvider().send("1");
+                          } : null,
+                          child: const Text("Mode 1"),
+                        )
+                        ,
+                        ElevatedButton(
+                          onPressed: bluetoothProvider.currentBluetoothState.isEnabled ? () {
+                            print("Click");
+                            BluetoothProvider().send("2");
+                          } : null,
+                          child: const Text("Mode 2"),
+                        )
+                        ,
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        ElevatedButton(
+                          onPressed: bluetoothProvider.currentBluetoothState.isEnabled ? () {
+                            print("Click");
+                            BluetoothProvider().send("3");
+                          } : null,
+                          child: const Text("Mode 3"),
+                        )
+                        ,
+                        ElevatedButton(
+                          onPressed: bluetoothProvider.currentBluetoothState.isEnabled ? () {
+                            print("Click");
+                            BluetoothProvider().send("4");
+                          } : null,
+                          child: const Text("Mode 4"),
+                        )
+                        ,
+                      ],
+                    )
+                  ],
+                ),
               )
             ],
           ),
