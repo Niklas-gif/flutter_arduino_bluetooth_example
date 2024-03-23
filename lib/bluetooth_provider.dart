@@ -18,6 +18,7 @@ class BluetoothProvider extends ChangeNotifier {
   PermissionStatus ?_bluetoothScanPermission;
 
   BluetoothProvider() {
+    //TODO this is bad
     checkPermissions();
   }
 

@@ -83,6 +83,7 @@ class ConnectWidget extends StatelessWidget {
                   ],
                 ),
               )
+              ,ElevatedButton(onPressed: ()=>{bluetoothProvider.checkPermissions()}, child: const Text("Permissions"))
             ],
           ),
         );
